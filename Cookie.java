@@ -3,7 +3,7 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Random;
 
-public class cookie extends ActiveAbstract{
+public class Cookie extends ActiveAbstract{
 
     private static final String BLOB_KEY = "blob";
     private static final String BLOB_ID_SUFFIX = " -- blob";
