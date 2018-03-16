@@ -11,7 +11,7 @@ public class Cookie extends ActiveAbstract{
     private static final int BLOB_ANIMATION_MIN = 50;
     private static final int BLOB_ANIMATION_MAX = 150;
 
-    public cookie(String id, Point position, List<PImage> images, int actionPeriod)
+    public Cookie(String id, Point position, List<PImage> images, int actionPeriod)
     {
         super(id, position, images, actionPeriod);
     }
