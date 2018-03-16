@@ -55,6 +55,12 @@ public class Factory {
         return new Ore(id, position, images, actionPeriod);
     }
     
+    public static Cookie createCookie(String id, Point position, int actionPeriod,
+                                   List<PImage> images)
+    {
+        return new Cookie(id, position, images, actionPeriod);
+    }
+    
     public static Flower createFlower(String id, Point position, int actionPeriod,
                                    List<PImage> images)
     {
