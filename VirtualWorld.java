@@ -185,5 +185,37 @@ public final class VirtualWorld
       parseCommandLine(args);
       PApplet.main(VirtualWorld.class);
    }
+   
+    public void mousePressed()
+   {
+      Point point = view.colRowToPoint(mouseX/TILE_WIDTH, mouseY/TILE_HEIGHT);
+
+       // Making sure I don't spawn a dragon on top of an existing entity.
+       for (Entity entity : world.getEntities())
+       {
+           if (entity.getPosition().equals(point))
+           {
+               System.out.println("Entity");
+               return;
+           }
+       }
+
+       // Add therestaurant
+       Restaurant restaurant = Factory.createRestaurant("RESTAURANT_" + point.x + "_" + point.y,
+               point, imageStore.getImageList("restaurant"));
+
+       world.addEntity(restaurant);
+       restaurant.scheduleActions(scheduler, world, imageStore);
+
+       // Make flowers
+       List<Point> neighbors = world.getNeighborPoints(point, 2);
+       Random rand = new Random();
+       for (Point p : neighbors)
+       {
+           int dist = point.distanceSquared(p);
+           if (dist < rand.nextInt(6) + 1)
+              world.setBackgroundImage(imageStore.getImageList("flower"), p);
+       }
+   }
 
 }
