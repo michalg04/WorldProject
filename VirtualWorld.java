@@ -160,7 +160,7 @@ public final class VirtualWorld
         PApplet.main(VirtualWorld.class);
     }
 
-    public void mousePressed() {
+    /*public void mousePressed() {
         Point point = view.colRowToPoint(mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
 
         // Making sure I don't spawn a dragon on top of an existing entity.
@@ -187,5 +187,5 @@ public final class VirtualWorld
                 world.setBackgroundImage(imageStore.getImageList("flower"), p);
         }
     }
-
+*/
 }

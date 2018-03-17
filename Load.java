@@ -61,18 +61,12 @@ public class Load {
     private static final int VEIN_ROW = 3;
     private static final int VEIN_ACTION_PERIOD = 4;
 
-    public static void loadImages(Scanner in, ImageStore imageStore,
-                                  PApplet screen)
-    {
+    public static void loadImages(Scanner in, ImageStore imageStore, PApplet screen) {
         int lineNumber = 0;
-        while (in.hasNextLine())
-        {
-            try
-            {
+        while (in.hasNextLine()) {
+            try {
                 processImageLine(imageStore.images(), in.nextLine(), screen);
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 System.out.println(String.format("Image format error on line %d",
                         lineNumber));
             }
@@ -80,21 +74,16 @@ public class Load {
         }
     }
 
-    private static void processImageLine(Map<String, List<PImage>> images,
-                                        String line, PApplet screen)
-    {
+    private static void processImageLine(Map<String, List<PImage>> images, String line, PApplet screen) {
         String[] attrs = line.split("\\s");
-        if (attrs.length >= 2)
-        {
+        if (attrs.length >= 2) {
             String key = attrs[0];
             PImage img = screen.loadImage(attrs[1]);
-            if (img != null && img.width != -1)
-            {
+            if (img != null && img.width != -1) {
                 List<PImage> imgs = getImages(images, key);
                 imgs.add(img);
 
-                if (attrs.length >= KEYED_IMAGE_MIN)
-                {
+                if (attrs.length >= KEYED_IMAGE_MIN) {
                     int r = Integer.parseInt(attrs[KEYED_RED_IDX]);
                     int g = Integer.parseInt(attrs[KEYED_GREEN_IDX]);
                     int b = Integer.parseInt(attrs[KEYED_BLUE_IDX]);
@@ -104,12 +93,9 @@ public class Load {
         }
     }
 
-    private static List<PImage> getImages(Map<String, List<PImage>> images,
-                                         String key)
-    {
+    private static List<PImage> getImages(Map<String, List<PImage>> images, String key) {
         List<PImage> imgs = images.get(key);
-        if (imgs == null)
-        {
+        if (imgs == null) {
             imgs = new LinkedList<>();
             images.put(key, imgs);
         }
@@ -120,42 +106,31 @@ public class Load {
       Called with color for which alpha should be set and alpha value.
       setAlpha(img, color(255, 255, 255), 0));
     */
-    private static void setAlpha(PImage img, int maskColor, int alpha)
-    {
+    private static void setAlpha(PImage img, int maskColor, int alpha) {
         int alphaValue = alpha << 24;
         int nonAlpha = maskColor & COLOR_MASK;
         img.format = PApplet.ARGB;
         img.loadPixels();
-        for (int i = 0; i < img.pixels.length; i++)
-        {
-            if ((img.pixels[i] & COLOR_MASK) == nonAlpha)
-            {
+        for (int i = 0; i < img.pixels.length; i++) {
+            if ((img.pixels[i] & COLOR_MASK) == nonAlpha) {
                 img.pixels[i] = alphaValue | nonAlpha;
             }
         }
         img.updatePixels();
     }
 
-    public static void load(Scanner in, WorldModel world, ImageStore imageStore)
-    {
+    public static void load(Scanner in, WorldModel world, ImageStore imageStore) {
         int lineNumber = 0;
-        while (in.hasNextLine())
-        {
-            try
-            {
-                if (!processLine(in.nextLine(), world, imageStore))
-                {
+        while (in.hasNextLine()) {
+            try {
+                if (!processLine(in.nextLine(), world, imageStore)) {
                     System.err.println(String.format("invalid entry on line %d",
                             lineNumber));
                 }
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 System.err.println(String.format("invalid entry on line %d",
                         lineNumber));
-            }
-            catch (IllegalArgumentException e)
-            {
+            } catch (IllegalArgumentException e) {
                 System.err.println(String.format("issue on line %d: %s",
                         lineNumber, e.getMessage()));
             }
@@ -163,14 +138,10 @@ public class Load {
         }
     }
 
-    private static boolean processLine(String line, WorldModel world,
-                                      ImageStore imageStore)
-    {
+    private static boolean processLine(String line, WorldModel world, ImageStore imageStore) {
         String[] properties = line.split("\\s");
-        if (properties.length > 0)
-        {
-            switch (properties[PROPERTY_KEY])
-            {
+        if (properties.length > 0) {
+            switch (properties[PROPERTY_KEY]) {
                 case BGND_KEY:
                     return parseBackground(properties, world, imageStore);
                 case MINER_KEY:
@@ -197,12 +168,8 @@ public class Load {
         return false;
     }
 
-
-    public static boolean parseObstacle(String [] properties, WorldModel world,
-                                        ImageStore imageStore)
-    {
-        if (properties.length == OBSTACLE_NUM_PROPERTIES)
-        {
+    public static boolean parseObstacle(String[] properties, WorldModel world, ImageStore imageStore) {
+        if (properties.length == OBSTACLE_NUM_PROPERTIES) {
             Point pt = new Point(
                     Integer.parseInt(properties[OBSTACLE_COL]),
                     Integer.parseInt(properties[OBSTACLE_ROW]));
@@ -214,11 +181,8 @@ public class Load {
         return properties.length == OBSTACLE_NUM_PROPERTIES;
     }
 
-    public static boolean parseBackground(String [] properties,
-                                          WorldModel world, ImageStore imageStore)
-    {
-        if (properties.length == BGND_NUM_PROPERTIES)
-        {
+    public static boolean parseBackground(String[] properties, WorldModel world, ImageStore imageStore) {
+        if (properties.length == BGND_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[BGND_COL]),
                     Integer.parseInt(properties[BGND_ROW]));
             String id = properties[BGND_ID];
@@ -229,11 +193,8 @@ public class Load {
         return properties.length == BGND_NUM_PROPERTIES;
     }
 
-    public static boolean parseMiner(String [] properties, WorldModel world,
-                                     ImageStore imageStore)
-    {
-        if (properties.length == MINER_NUM_PROPERTIES)
-        {
+    public static boolean parseMiner(String[] properties, WorldModel world, ImageStore imageStore) {
+        if (properties.length == MINER_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[MINER_COL]),
                     Integer.parseInt(properties[MINER_ROW]));
             Entity entity = Factory.createMinerNotFull(properties[MINER_ID],
@@ -247,11 +208,8 @@ public class Load {
         return properties.length == MINER_NUM_PROPERTIES;
     }
 
-    public static boolean parseOre(String [] properties, WorldModel world,
-                                   ImageStore imageStore)
-    {
-        if (properties.length == ORE_NUM_PROPERTIES)
-        {
+    public static boolean parseOre(String[] properties, WorldModel world, ImageStore imageStore) {
+        if (properties.length == ORE_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[ORE_COL]),
                     Integer.parseInt(properties[ORE_ROW]));
             Entity entity = Factory.createOre(properties[ORE_ID],
@@ -262,11 +220,8 @@ public class Load {
         return properties.length == ORE_NUM_PROPERTIES;
     }
 
-    public static boolean parseSmith(String [] properties, WorldModel world,
-                                     ImageStore imageStore)
-    {
-        if (properties.length == SMITH_NUM_PROPERTIES)
-        {
+    public static boolean parseSmith(String[] properties, WorldModel world, ImageStore imageStore) {
+        if (properties.length == SMITH_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[SMITH_COL]),
                     Integer.parseInt(properties[SMITH_ROW]));
             Entity entity = Factory.createBlacksmith(properties[SMITH_ID],
@@ -277,11 +232,8 @@ public class Load {
         return properties.length == SMITH_NUM_PROPERTIES;
     }
 
-    public static boolean parseVein(String [] properties, WorldModel world,
-                                    ImageStore imageStore)
-    {
-        if (properties.length == VEIN_NUM_PROPERTIES)
-        {
+    public static boolean parseVein(String[] properties, WorldModel world, ImageStore imageStore) {
+        if (properties.length == VEIN_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[VEIN_COL]),
                     Integer.parseInt(properties[VEIN_ROW]));
             Entity entity = Factory.createVein(properties[VEIN_ID],
@@ -292,4 +244,21 @@ public class Load {
 
         return properties.length == VEIN_NUM_PROPERTIES;
     }
+
+    public static boolean parseCookie(String[] properties, WorldModel world, ImageStore imageStore) {
+        return true;
+    }
+
+    public static boolean parseJulie(String[] properties, WorldModel world, ImageStore imageStore) {
+        return true;
+    }
+
+    public static boolean parseFlower(String[] properties, WorldModel world, ImageStore imageStore) {
+        return true;
+    }
+
+    public static boolean parseRat(String[] properties, WorldModel world, ImageStore imageStore) {
+        return true;
+    }
+
 }
