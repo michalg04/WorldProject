@@ -32,10 +32,16 @@ public class Factory {
         return new MinerNotFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod);
     }
 
-    public static Julie createJulie(String id, int resourceLimit,
-                                    Point position, int actionPeriod, int animationPeriod,
-                                    List<PImage> images) {
-        return new Julie(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod);
+    public static JulieNotFull createJulieNotFull(String id, int resourceLimit,
+                                                  Point position, int actionPeriod, int animationPeriod,
+                                                  List<PImage> images) {
+        return new JulieNotFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod);
+    }
+
+    public static JulieFull createJulieFull(String id, int resourceLimit,
+                                                   Point position, int actionPeriod, int animationPeriod,
+                                                   List<PImage> images) {
+        return new JulieFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod);
     }
 
     public static Obstacle createObstacle(String id, Point position,
