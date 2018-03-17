@@ -159,7 +159,7 @@ public final class VirtualWorld
         parseCommandLine(args);
         PApplet.main(VirtualWorld.class);
     }
-
+//commented out so I could get the program to run
     /*public void mousePressed() {
         Point point = view.colRowToPoint(mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
 
@@ -171,7 +171,7 @@ public final class VirtualWorld
             }
         }
 
-        // Add therestaurant
+        // Add the restaurant
         Restaurant restaurant = Factory.createRestaurant("RESTAURANT_" + point.x + "_" + point.y,
                 point, imageStore.getImageList("restaurant"));
 
