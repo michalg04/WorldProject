@@ -31,15 +31,15 @@ public class Julie extends MoveAbstract{
 
     private void transform(WorldModel world, EventScheduler scheduler, ImageStore imageStore)
     {
-        MinerNotFull miner = Factory.createJulie(getId(), resourceLimit,
+        Julie julie = Factory.createJulie(getId(), resourceLimit,
                 getPosition(), getActionPeriod(), getAnimationPeriod(),
                 getImages());
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
 
-        world.addEntity(miner);
-        miner.scheduleActions(scheduler, world, imageStore);
+        world.addEntity(julie);
+        julie.scheduleActions(scheduler, world, imageStore);
     }
 }
 
