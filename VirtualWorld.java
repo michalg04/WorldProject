@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.List;
+import java.util.Random;
 
 import processing.core.*;
 
@@ -159,11 +161,11 @@ public final class VirtualWorld
         parseCommandLine(args);
         PApplet.main(VirtualWorld.class);
     }
-//commented out so I could get the program to run
-    /*public void mousePressed() {
-        Point point = view.colRowToPoint(mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
 
-        // Making sure I don't spawn a dragon on top of an existing entity.
+    public void mousePressed() {
+        Point point = new Point(mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
+
+        // Making sure I don't spawn a julie on top of an existing entity.
         for (Entity entity : world.getEntities()) {
             if (entity.getPosition().equals(point)) {
                 System.out.println("Entity");
@@ -176,8 +178,14 @@ public final class VirtualWorld
                 point, imageStore.getImageList("restaurant"));
 
         world.addEntity(restaurant);
-        restaurant.scheduleActions(scheduler, world, imageStore);
 
+        // Add julie
+        Julie julie = Factory.createJulie("JULIE_" + point.x + "_" + point.y, 0,
+                point, 0, 0, imageStore.getImageList("julie"));
+
+        world.addEntity(julie);
+        // restaurant.scheduleActions(scheduler, world, imageStore);
+/*
         // Make flowers
         List<Point> neighbors = world.getNeighborPoints(point, 2);
         Random rand = new Random();
@@ -185,7 +193,7 @@ public final class VirtualWorld
             int dist = point.distanceSquared(p);
             if (dist < rand.nextInt(6) + 1)
                 world.setBackgroundImage(imageStore.getImageList("flower"), p);
-        }
+        }*/
     }
-*/
+
 }
