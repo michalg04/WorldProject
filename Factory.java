@@ -15,10 +15,10 @@ public class Factory {
         return new Blacksmith(id, position, images);
     }
     
-    public static Restaraunt createRestaurant(String id, Point position,
+    public static Restaurant createRestaurant(String id, Point position,
                                           List<PImage> images)
     {
-        return new Restaraunt(id, position, images);
+        return new Restaurant(id, position, images);
     }
 
     public static MinerFull createMinerFull(String id, int resourceLimit,
@@ -61,10 +61,9 @@ public class Factory {
         return new Cookie(id, position, images, actionPeriod);
     }
     
-    public static Flower createFlower(String id, Point position, int actionPeriod,
-                                   List<PImage> images)
+    public static Flower createFlower(String id, Point position, List<PImage> images)
     {
-        return new Flower(id, position, images, actionPeriod);
+        return new Flower(id, position, images);
     }
 
     public static OreBlob createOreBlob(String id, Point position,
