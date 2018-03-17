@@ -180,11 +180,11 @@ public final class VirtualWorld
         world.addEntity(restaurant);
 
         // Add julie
-        Julie julie = Factory.createJulie("JULIE_" + point.x + "_" + point.y, 0,
-                point, 0, 0, imageStore.getImageList("julie"));
+        JulieNotFull julie = Factory.createJulieNotFull("JULIE_" + point.x + "_" + point.y, 2,
+                point, 100, 0, imageStore.getImageList("julie"));
 
         world.addEntity(julie);
-        // restaurant.scheduleActions(scheduler, world, imageStore);
+        julie.scheduleActions(scheduler, world, imageStore);
 /*
         // Make flowers
         List<Point> neighbors = world.getNeighborPoints(point, 2);
