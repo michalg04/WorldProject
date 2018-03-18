@@ -3,7 +3,7 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Random;
 
-public class Ore extends ActiveAbstract{
+public class Ore extends ActiveAbstract {
 
     private static final String BLOB_KEY = "blob";
     private static final String BLOB_ID_SUFFIX = " -- blob";
@@ -11,13 +11,11 @@ public class Ore extends ActiveAbstract{
     private static final int BLOB_ANIMATION_MIN = 50;
     private static final int BLOB_ANIMATION_MAX = 150;
 
-    public Ore(String id, Point position, List<PImage> images, int actionPeriod)
-    {
+    public Ore(String id, Point position, List<PImage> images, int actionPeriod) {
         super(id, position, images, actionPeriod);
     }
 
-    public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
-    {
+    public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
         Point pos = getPosition();  // store current position before removing
 
         world.removeEntity(this);
@@ -33,4 +31,12 @@ public class Ore extends ActiveAbstract{
         blob.scheduleActions(scheduler, world, imageStore);
     }
 
+    public void transformToCookie(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
+        Cookie cookie = Factory.createCookie(getId(), getPosition(), getImages());
+
+        world.removeEntity(this);
+        scheduler.unscheduleAllEvents(this);
+
+        //world.addEntity(cookie);
+    }
 }
