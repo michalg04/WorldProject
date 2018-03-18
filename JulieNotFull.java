@@ -6,10 +6,11 @@ import java.util.Optional;
 public class JulieNotFull extends MoveAbstract {
 
     private final int resourceLimit;
-    private final int resourceCount;
+    private int resourceCount;
+    private ImageStore imageStore;
 
     public JulieNotFull(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount,
-                 int actionPeriod, int animationPeriod) {
+                        int actionPeriod, int animationPeriod) {
         super(id, position, images, actionPeriod, animationPeriod);
         this.resourceLimit = resourceLimit;
         this.resourceCount = resourceCount;
@@ -21,18 +22,15 @@ public class JulieNotFull extends MoveAbstract {
 
         if (!notFullTarget.isPresent() ||
                 !moveTo(world, notFullTarget.get(), scheduler) ||
-                !transform(world, scheduler, imageStore))
-        {
+                !transform(world, scheduler, imageStore)) {
             scheduler.scheduleEvent(this,
                     createActivity(world, imageStore),
                     getActionPeriod());
         }
     }
 
-    private boolean transform(WorldModel world, EventScheduler scheduler, ImageStore imageStore)
-    {
-        if (resourceCount >= resourceLimit)
-        {
+    private boolean transform(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
+        if (resourceCount >= resourceLimit) {
             JulieFull julie = Factory.createJulieFull(getId(), resourceLimit,
                     getPosition(), getActionPeriod(), getAnimationPeriod(),
                     getImages());
@@ -47,6 +45,16 @@ public class JulieNotFull extends MoveAbstract {
         }
 
         return false;
+    }
+
+    public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
+        if (super.moveTo(world, target, scheduler)) {
+            resourceCount += 1;
+            ((Ore)target).transformToCookie(world,scheduler,imageStore);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
