@@ -29,6 +29,12 @@ final class Point
       return result;
    }
 
+   public int distanceSquared(Point p){
+      double deltaX = Math.pow(x - p.x, 2.0);
+      double deltaY = Math.pow(y - p.y, 2.0);
+      double dis = Math.sqrt(deltaX + deltaY);
+      return  (int)Math.pow(dis, 2);
+   }
    public int getX() {return x;}
    public int getY() {return y;}
 
