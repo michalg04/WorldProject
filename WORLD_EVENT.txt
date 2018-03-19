@@ -10,7 +10,7 @@ The code is located in Brittani's github
 
 3. The ore blobs should turn into rats and eat the cookies that julie has created. 
 
-4. Julies should turn ore into cookies.s
+4. Julies should turn ore into cookies.
 
 5. 
 Brittani responiblities...
