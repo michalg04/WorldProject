@@ -1,5 +1,4 @@
 import processing.core.PImage;
-
 import java.util.List;
 import java.util.Random;
 
@@ -31,16 +30,4 @@ public class Ore extends ActiveAbstract {
         blob.scheduleActions(scheduler, world, imageStore);
     }
 
-    public void transformToCookie(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        Point pos = getPosition();  // store current position before removing
-
-        world.removeEntity(this);
-        scheduler.unscheduleAllEvents(this);
-
-        Cookie cookie = Factory.createCookie("cookie_" +
-                pos.getX() + "_" + pos.y, pos, imageStore.getImageList("cookie"));
-
-        world.addEntity(cookie);
-        world.removeEntity(cookie);
-    }
 }
