@@ -181,7 +181,7 @@ public final class VirtualWorld
 
         // Add julie
         JulieNotFull julie = Factory.createJulieNotFull("JULIE_" + point.x + "_" + point.y, 2,
-                point, 0, 0, imageStore.getImageList("julie"));
+                point, 830, 100, imageStore.getImageList("julie"));
 
         world.addEntity(julie);
         julie.scheduleActions(scheduler, world, imageStore);
