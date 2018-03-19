@@ -180,7 +180,7 @@ public final class VirtualWorld
         world.addEntity(restaurant);
 
         // Add julie
-        JulieNotFull julie = Factory.createJulieNotFull("JULIE_" + point.x + "_" + point.y, 2,
+        Julie julie = Factory.createJulie("JULIE_" + point.x + "_" + point.y, 2,
                 point, 830, 100, imageStore.getImageList("julie"));
 
         world.addEntity(julie);
