@@ -15,22 +15,14 @@ public class Rat extends MoveAbstract{
 
     public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
-        Optional<Entity> blobTarget = world.findNearest(getPosition(), Vein.class);
+        Optional<Entity> blobTarget = world.findNearest(getPosition(), Cookie.class);
         long nextPeriod = getActionPeriod();
 
         if (blobTarget.isPresent())
         {
-            Point tgtPos = blobTarget.get().getPosition();
 
-            if (moveTo(world, blobTarget.get(), scheduler))
-            {
-                Quake quake = Factory.createQuake(tgtPos,
-                        imageStore.getImageList(QUAKE_KEY));
+            moveTo(world, blobTarget.get(), scheduler);
 
-                world.addEntity(quake);
-                nextPeriod += getActionPeriod();
-                quake.scheduleActions(scheduler, world, imageStore);
-            }
         }
 
         scheduler.scheduleEvent(this,
@@ -39,7 +31,7 @@ public class Rat extends MoveAbstract{
     }
 
     public Point nextPosition(WorldModel world, Point destPos)
-    {
+    { 
         int horiz = Integer.signum(destPos.x - getPosition().x);
         Point newPos = new Point(getPosition().x + horiz, getPosition().y);
 
@@ -53,13 +45,13 @@ public class Rat extends MoveAbstract{
             occupant = world.getOccupant(newPos);
 
             if (vert == 0 ||
-                    (occupant.isPresent() && !(occupant.get() instanceof Ore)))
+                    (occupant.isPresent() && !(occupant.get() instanceof Cookie)))
             {
                 newPos = getPosition();
             }
         }
         return newPos;
-
+  
     }
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
@@ -67,9 +59,9 @@ public class Rat extends MoveAbstract{
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
+
 }
