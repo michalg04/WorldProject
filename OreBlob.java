@@ -7,11 +7,6 @@ import java.util.function.Predicate;
 
 public class OreBlob extends MoveAbstract{
     private static final String QUAKE_KEY = "quake";
-    private static final String RAT_KEY = "rat";
-    private static final String RAT_ID_SUFFIX = " -- rat";
-    private static final int RAT_PERIOD_SCALE = 4;
-    private static final int RAT_ANIMATION_MIN = 50;
-    private static final int RAT_ANIMATION_MAX = 150;
 
     public OreBlob(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod)
     {
@@ -37,32 +32,13 @@ public class OreBlob extends MoveAbstract{
                 quake.scheduleActions(scheduler, world, imageStore);
             }
         }
+        scheduler.scheduleEvent(this, createActivity(world, imageStore), nextPeriod);
 
-        Optional<Entity> restTarget = world.findNearest(getPosition(), Restaurant.class);
-        if (restTarget.isPresent()) {
-            transform(world, scheduler, imageStore);
-        } else {
-            scheduler.scheduleEvent(this,
-                    createActivity(world, imageStore),
-                    nextPeriod);
-        }
     }
 
-    private void transform(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        Rat rat = Factory.createRat(getId() + RAT_ID_SUFFIX,
-                getPosition(), getActionPeriod() / RAT_PERIOD_SCALE,
-                RAT_ANIMATION_MIN +
-                        rand.nextInt(RAT_ANIMATION_MAX - RAT_ANIMATION_MIN),
-                imageStore.getImageList(RAT_KEY));
-        world.removeEntity(this);
-        scheduler.unscheduleAllEvents(this);
-
-        world.addEntity(rat);
-        rat.scheduleActions(scheduler, world, imageStore);
-    }
 
     public Point nextPosition(WorldModel world, Point destPos)
-    { 
+    {
         int horiz = Integer.signum(destPos.x - getPosition().x);
         Point newPos = new Point(getPosition().x + horiz, getPosition().y);
 
