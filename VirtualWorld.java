@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import processing.core.*;
 
@@ -163,7 +164,7 @@ public final class VirtualWorld
     }
 
     public void mousePressed() {
-        Point point = view.colRowToPoint(mouseX/TILE_WIDTH, mouseY/TILE_HEIGHT);
+        Point point = view.colRowToPoint(mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
 
         // Making sure I don't spawn a julie on top of an existing entity.
         for (Entity entity : world.getEntities()) {
@@ -185,15 +186,17 @@ public final class VirtualWorld
 
         world.addEntity(julie);
         julie.scheduleActions(scheduler, world, imageStore);
-/*
+
         // Make flowers
-        List<Point> neighbors = world.getNeighborPoints(point, 2);
+        List<Point> neighbors = world.DIAGONAL_CARDINAL_NEIGHBORS.apply(point).collect(Collectors.toList());
         Random rand = new Random();
         for (Point p : neighbors) {
             int dist = point.distanceSquared(p);
-            if (dist < rand.nextInt(6) + 1)
-                world.setBackgroundImage(imageStore.getImageList("flower"), p);
-        }*/
+            if (dist < rand.nextInt(6) + 1) {
+                Background flower = new Background("flower", imageStore.getImageList("flower"));
+                world.setBackground(p, flower);
+            }
+        }
     }
 
 }
