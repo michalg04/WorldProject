@@ -163,7 +163,7 @@ public final class VirtualWorld
     }
 
     public void mousePressed() {
-        Point point = new Point(mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
+        Point point = view.colRowToPoint(mouseX/TILE_WIDTH, mouseY/TILE_HEIGHT);
 
         // Making sure I don't spawn a julie on top of an existing entity.
         for (Entity entity : world.getEntities()) {

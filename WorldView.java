@@ -60,4 +60,8 @@ final class WorldView {
     private int clamp(int value, int low, int high) {
         return Math.min(high, Math.max(value, low));
     }
+
+    public Point colRowToPoint(int col, int row) {
+        return viewport.viewportToWorld(col, row);
+    }
 }
