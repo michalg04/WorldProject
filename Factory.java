@@ -53,10 +53,6 @@ public class Factory {
         return new Cookie(id, position, images);
     }
 
-    public static Flower createFlower(String id, Point position, List<PImage> images) {
-        return new Flower(id, position, images);
-    }
-
     public static OreBlob createOreBlob(String id, Point position,
                                         int actionPeriod, int animationPeriod, List<PImage> images) {
         return new OreBlob(id, position, images, actionPeriod, animationPeriod);
