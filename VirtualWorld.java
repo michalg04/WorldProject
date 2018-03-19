@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
@@ -35,6 +36,12 @@ public final class VirtualWorld
     private static final double FAST_SCALE = 0.5;
     private static final double FASTER_SCALE = 0.25;
     private static final double FASTEST_SCALE = 0.10;
+
+    private static final String RAT_KEY = "rat";
+    private static final String RAT_ID_SUFFIX = " -- rat";
+    private static final int RAT_PERIOD_SCALE = 4;
+    private static final int RAT_ANIMATION_MIN = 50;
+    private static final int RAT_ANIMATION_MAX = 150;
 
     private static double timeScale = 1.0;
 
@@ -188,15 +195,35 @@ public final class VirtualWorld
         julie.scheduleActions(scheduler, world, imageStore);
 
         // Make flowers
-        List<Point> neighbors = world.neighbors(point, 2);
+        List<Point> neighbors = world.DIAGONAL_CARDINAL_NEIGHBORS.apply(point).collect(Collectors.toList());
         Random rand = new Random();
         for (Point p : neighbors) {
             int dist = point.distanceSquared(p);
-            if (dist < rand.nextInt(8) + 1) {
+            if (dist < rand.nextInt(6) + 1) {
                 Background flower = new Background("flower", imageStore.getImageList("flower"));
                 world.setBackground(p, flower);
             }
         }
+
+        for (Point p : neighbors) {
+            Optional<Entity> blobTarget = world.findNearest(p,
+                    OreBlob.class);
+            if (blobTarget.isPresent()){
+                Rat rat = Factory.createRat(RAT_ID_SUFFIX,
+                        p, RAT_PERIOD_SCALE,
+                        RAT_ANIMATION_MIN +
+                                rand.nextInt(RAT_ANIMATION_MAX - RAT_ANIMATION_MIN),
+                        imageStore.getImageList(RAT_KEY));
+
+                world.removeEntity(blobTarget.get());
+                scheduler.unscheduleAllEvents(blobTarget.get());
+
+                world.addEntity(rat);
+                rat.scheduleActions(scheduler, world, imageStore);
+            }
+        }
+
+
     }
 
 }
