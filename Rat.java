@@ -66,7 +66,7 @@ public class Rat extends MoveAbstract{
         Optional<Entity> occupant = world.getOccupant(newPos);
         PathingStrategy strategy = new AStarPathingStrategy();
         Predicate<Point> canPassThrough = p -> ((!world.isOccupied(p) ||
-                (occupant.isPresent() && occupant.get() instanceof Ore)) && world.withinBounds(p));
+                (occupant.isPresent() && occupant.get() instanceof Cookie)) && world.withinBounds(p));
         BiPredicate<Point, Point> withinReach = (Point p1, Point p2) -> adjacent(p1, p2);
         List<Point> path = strategy.computePath(getPosition(),
                 destPos, canPassThrough, withinReach, PathingStrategy.CARDINAL_NEIGHBORS);
