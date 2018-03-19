@@ -32,11 +32,15 @@ public class Ore extends ActiveAbstract {
     }
 
     public void transformToCookie(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        Cookie cookie = Factory.createCookie(getId(), getPosition(), getImages());
+        Point pos = getPosition();  // store current position before removing
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
 
-        //world.addEntity(cookie);
+        Cookie cookie = Factory.createCookie("cookie_" +
+                pos.getX() + "_" + pos.y, pos, imageStore.getImageList("cookie"));
+
+        world.addEntity(cookie);
+        world.removeEntity(cookie);
     }
 }

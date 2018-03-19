@@ -7,7 +7,6 @@ public class JulieNotFull extends MoveAbstract {
 
     private final int resourceLimit;
     private int resourceCount;
-    private ImageStore imageStore;
 
     public JulieNotFull(String id, Point position, List<PImage> images, int resourceLimit, int resourceCount,
                         int actionPeriod, int animationPeriod) {
@@ -21,7 +20,7 @@ public class JulieNotFull extends MoveAbstract {
         Optional<Entity> notFullTarget = world.findNearest(getPosition(), Ore.class);
 
         if (!notFullTarget.isPresent() ||
-                !moveTo(world, notFullTarget.get(), scheduler) ||
+                !moveTo(world, notFullTarget.get(), scheduler, imageStore) ||
                 !transform(world, scheduler, imageStore)) {
             scheduler.scheduleEvent(this,
                     createActivity(world, imageStore),
@@ -47,7 +46,7 @@ public class JulieNotFull extends MoveAbstract {
         return false;
     }
 
-    public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
+    public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler, ImageStore imageStore) {
         if (super.moveTo(world, target, scheduler)) {
             resourceCount += 1;
             ((Ore)target).transformToCookie(world,scheduler,imageStore);
