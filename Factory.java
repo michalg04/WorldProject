@@ -39,8 +39,8 @@ public class Factory {
     }
 
     public static JulieFull createJulieFull(String id, int resourceLimit,
-                                                   Point position, int actionPeriod, int animationPeriod,
-                                                   List<PImage> images) {
+                                            Point position, int actionPeriod, int animationPeriod,
+                                            List<PImage> images) {
         return new JulieFull(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod);
     }
 
