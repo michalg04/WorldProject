@@ -39,7 +39,7 @@ public class Rat extends MoveAbstract{
     }
 
     public Point nextPosition(WorldModel world, Point destPos)
-    { 
+    {
         int horiz = Integer.signum(destPos.x - getPosition().x);
         Point newPos = new Point(getPosition().x + horiz, getPosition().y);
 
@@ -59,7 +59,7 @@ public class Rat extends MoveAbstract{
             }
         }
         return newPos;
-  
+
     }
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {

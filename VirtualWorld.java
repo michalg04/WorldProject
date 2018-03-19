@@ -188,11 +188,11 @@ public final class VirtualWorld
         julie.scheduleActions(scheduler, world, imageStore);
 
         // Make flowers
-        List<Point> neighbors = world.DIAGONAL_CARDINAL_NEIGHBORS.apply(point).collect(Collectors.toList());
+        List<Point> neighbors = world.neighbors(point, 2);
         Random rand = new Random();
         for (Point p : neighbors) {
             int dist = point.distanceSquared(p);
-            if (dist < rand.nextInt(6) + 1) {
+            if (dist < rand.nextInt(8) + 1) {
                 Background flower = new Background("flower", imageStore.getImageList("flower"));
                 world.setBackground(p, flower);
             }

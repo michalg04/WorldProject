@@ -182,16 +182,20 @@ final class WorldModel {
         return numCols;
     }
 
-    public final Function<Point, Stream<Point>> DIAGONAL_CARDINAL_NEIGHBORS =
-            point ->
-                    Stream.<Point>builder()
-                            .add(new Point(point.x - 1, point.y - 1))
-                            .add(new Point(point.x + 1, point.y + 1))
-                            .add(new Point(point.x - 1, point.y + 1))
-                            .add(new Point(point.x + 1, point.y - 1))
-                            .add(new Point(point.x, point.y - 1))
-                            .add(new Point(point.x, point.y + 1))
-                            .add(new Point(point.x - 1, point.y))
-                            .add(new Point(point.x + 1, point.y))
-                            .build();
+    public List<Point> neighbors(Point point, int num) {
+        List<Point> neighbor = new ArrayList<>();
+        int i = 1;
+        while (i <= num) {
+            neighbor.add(new Point(point.x - i, point.y - i));
+            neighbor.add(new Point(point.x + i, point.y + i));
+            neighbor.add(new Point(point.x - i, point.y + i));
+            neighbor.add(new Point(point.x + i, point.y - i));
+            neighbor.add(new Point(point.x, point.y - i));
+            neighbor.add(new Point(point.x, point.y + i));
+            neighbor.add(new Point(point.x - i, point.y));
+            neighbor.add(new Point(point.x + i, point.y));
+            i++;
+        }
+        return neighbor;
+    }
 }
