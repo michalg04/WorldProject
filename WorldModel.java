@@ -1,6 +1,8 @@
 import processing.core.PImage;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 final class WorldModel {
     private final int numRows;
@@ -179,4 +181,17 @@ final class WorldModel {
     public int getNumCols() {
         return numCols;
     }
+
+    public final Function<Point, Stream<Point>> DIAGONAL_CARDINAL_NEIGHBORS =
+            point ->
+                    Stream.<Point>builder()
+                            .add(new Point(point.x - 1, point.y - 1))
+                            .add(new Point(point.x + 1, point.y + 1))
+                            .add(new Point(point.x - 1, point.y + 1))
+                            .add(new Point(point.x + 1, point.y - 1))
+                            .add(new Point(point.x, point.y - 1))
+                            .add(new Point(point.x, point.y + 1))
+                            .add(new Point(point.x - 1, point.y))
+                            .add(new Point(point.x + 1, point.y))
+                            .build();
 }
