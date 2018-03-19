@@ -28,15 +28,15 @@ quake images/quake6.bmp 255 255 255 0
 rocks images/rock.bmp
 vein images/vein.bmp
 background_default images/none.bmp
-julie images/julie1.bmp 255 255 255 0
-julie images/julie2.bmp 255 255 255 0
-julie images/julie3.bmp 255 255 255 0
-julie images/julie4.bmp 255 255 255 0
-julie images/julie5.bmp 255 255 255 0
-julie images/julie6.bmp 255 255 255 0
-julie images/julie7.bmp 255 255 255 0
-julie images/julie8.bmp 255 255 255 0
-julie images/julie9.bmp 255 255 255 0
+julie images/Julie1.bmp 255 255 255 0
+julie images/Julie2.bmp 255 255 255 0
+julie images/Julie3.bmp 255 255 255 0
+julie images/Julie4.bmp 255 255 255 0
+julie images/Julie5.bmp 255 255 255 0
+julie images/Julie6.bmp 255 255 255 0
+julie images/Julie7.bmp 255 255 255 0
+julie images/Julie8.bmp 255 255 255 0
+julie images/Julie9.bmp 255 255 255 0
 cookie images/cookie.bmp 255 255 255 0
 restaurant images/restaurant.bmp 255 255 255 0
 flower images/flowers.bmp 255 255 255 0
