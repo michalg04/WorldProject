@@ -154,15 +154,7 @@ public class Load {
                     return parseSmith(properties, world, imageStore);
                 case VEIN_KEY:
                     return parseVein(properties, world, imageStore);
-                case COOKIE_KEY:
-                    return parseCookie(properties, world, imageStore);
-                case JULIE_KEY:
-                    return parseJulie(properties, world, imageStore);
-                case FLOWER_KEY:
-                    return parseFlower(properties, world, imageStore);
-                case RAT_KEY:
-                    return parseRat(properties, world, imageStore);
-            }
+                }
         }
 
         return false;
@@ -245,20 +237,5 @@ public class Load {
         return properties.length == VEIN_NUM_PROPERTIES;
     }
 
-    public static boolean parseCookie(String[] properties, WorldModel world, ImageStore imageStore) {
-        return true;
-    }
-
-    public static boolean parseJulie(String[] properties, WorldModel world, ImageStore imageStore) {
-        return true;
-    }
-
-    public static boolean parseFlower(String[] properties, WorldModel world, ImageStore imageStore) {
-        return true;
-    }
-
-    public static boolean parseRat(String[] properties, WorldModel world, ImageStore imageStore) {
-        return true;
-    }
 
 }
