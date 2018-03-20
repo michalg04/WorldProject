@@ -20,11 +20,6 @@ public class Load {
     private static final String ORE_KEY = "ore";
     private static final String SMITH_KEY = "blacksmith";
     private static final String VEIN_KEY = "vein";
-    private static final String COOKIE_KEY = "cookie";
-    private static final String JULIE_KEY = "julie";
-    private static final String FLOWER_KEY = "flower";
-    private static final String RESTAURANT_KEY = "restuarant";
-    private static final String RAT_KEY = "rat";
 
     private static final int OBSTACLE_NUM_PROPERTIES = 4;
     private static final int OBSTACLE_ID = 1;

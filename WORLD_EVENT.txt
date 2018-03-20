@@ -1,6 +1,6 @@
 Project 5
 Names: Brittani Kealoha and Michal Golovanevsky
-The code is located in Michal's github
+The code is located in Michal's and Brittani's github
 
 1. An event is triggered by a mouse click.
 
