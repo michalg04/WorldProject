@@ -189,7 +189,7 @@ public final class VirtualWorld
 
         // Add julie
         Julie julie = Factory.createJulie("JULIE_" + point.x + "_" + point.y, 2,
-                point, 830, 100, imageStore.getImageList("julie"));
+                point, 450, 100, imageStore.getImageList("julie"));
 
         world.addEntity(julie);
         julie.scheduleActions(scheduler, world, imageStore);
