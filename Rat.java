@@ -15,13 +15,13 @@ public class Rat extends MoveAbstract{
 
     public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
-        Optional<Entity> blobTarget = world.findNearest(getPosition(), Cookie.class);
+        Optional<Entity> cookieTarget = world.findNearest(getPosition(), Cookie.class);
         long nextPeriod = getActionPeriod();
 
-        if (blobTarget.isPresent())
+        if (cookieTarget.isPresent())
         {
 
-            moveTo(world, blobTarget.get(), scheduler);
+            moveTo(world, cookieTarget.get(), scheduler);
 
         }
 
