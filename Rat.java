@@ -32,26 +32,22 @@ public class Rat extends MoveAbstract{
 
     public Point nextPosition(WorldModel world, Point destPos)
     { 
-        int horiz = Integer.signum(destPos.x - getPosition().x);
+         int horiz = Integer.signum(destPos.x - getPosition().x);
         Point newPos = new Point(getPosition().x + horiz, getPosition().y);
 
         Optional<Entity> occupant = world.getOccupant(newPos);
+        PathingStrategy strategy = new SingleStepPathingStrategy();
+        Predicate<Point> canPassThrough = p -> ((!world.isOccupied(p) ||
+                (occupant.isPresent() && occupant.get() instanceof Cookie)) && world.withinBounds(p));
+        BiPredicate<Point, Point> withinReach = (Point p1, Point p2) -> adjacent(p1, p2);
+        List<Point> path = strategy.computePath(getPosition(),
+                destPos, canPassThrough, withinReach, PathingStrategy.CARDINAL_NEIGHBORS);
 
-        if (horiz == 0 ||
-                (occupant.isPresent() && !(occupant.get() instanceof Cookie)))
-        {
-            int vert = Integer.signum(destPos.y - getPosition().y);
-            newPos = new Point(getPosition().x, getPosition().y + vert);
-            occupant = world.getOccupant(newPos);
-
-            if (vert == 0 ||
-                    (occupant.isPresent() && !(occupant.get() instanceof Cookie)))
-            {
-                newPos = getPosition();
-            }
-        }
-        return newPos;
-  
+        if (path == null)
+            return getPosition();
+        if (path.size() == 0)
+            return getPosition();
+        return path.get(0);
     }
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
