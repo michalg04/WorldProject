@@ -206,9 +206,8 @@ public final class VirtualWorld
         }
 
         for (Point p : neighbors) {
-            Optional<Entity> blobTarget = world.findNearest(p,
-                    OreBlob.class);
-            if (blobTarget.isPresent()){
+            Optional<Entity> blobTarget = world.getOccupant(p);
+            if (blobTarget.isPresent() && blobTarget.get() instanceof OreBlob){
                 Rat rat = Factory.createRat(RAT_ID_SUFFIX,
                         p, RAT_PERIOD_SCALE,
                         RAT_ANIMATION_MIN +
