@@ -25,5 +25,11 @@ Brittani responsibilities...
 - created code to change ore to cookies
 
 Michal's responsibilities...
+- edited the provided code for the mouse click to work in our project
 - created the rat class
-- changed to the code so nearby oreblobs go to the restaurant and change to rats
+- created the cookie class
+- changed to the code so oreblobs near the restaurant change into rats
+- changed the load class to work for our project
+- changed the factory class to work for our project
+- edited VirtualWorld to work with the new entities
+
