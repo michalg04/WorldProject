@@ -1,0 +1,35 @@
+Project 5
+Names: Brittani Kealoha and Michal Golovanevsky
+The code is located in Michal's github
+
+1. An event is triggered by a mouse click.
+
+2. When an event is trigger a restaurant should pop up with some surrounding flowers, 
+	a Julie should also span from the restaurant 
+	and nearby ore blobs should be drawn to the restaurant.
+
+3. The ore blobs should turn into rats if they are in radius of two away from the restaurant
+    at the time of the mouse click and eat the cookies that julie has created.
+    The rats should move slower and less efficiently than julie so,
+    she can create cookies faster than they are eaten.
+
+4. Julies should turn ore into cookie and move faster than miners.
+
+5. 
+Brittani responsibilities...
+- edited the provided code for the mouse click to work in our project
+- created all the functions of julie
+- created all new images in the project
+- created the restaurant class
+- edited to the code to be able to change the background to flowers
+- created code to change ore to cookies
+
+Michal's responsibilities...
+- edited the provided code for the mouse click to work in our project
+- created the rat class
+- created the cookie class
+- changed to the code so oreblobs near the restaurant change into rats
+- changed the load class to work for our project
+- changed the factory class to work for our project
+- edited VirtualWorld to work with the new entities
+
