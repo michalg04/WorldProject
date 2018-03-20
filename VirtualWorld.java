@@ -195,7 +195,7 @@ public final class VirtualWorld
         julie.scheduleActions(scheduler, world, imageStore);
 
         // Make flowers
-        List<Point> neighbors = world.neighbors(point, 2);
+        List<Point> neighbors = world.neighbors(point, 3);
         Random rand = new Random();
         for (Point p : neighbors) {
             int dist = point.distanceSquared(p);
